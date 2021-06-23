@@ -10,22 +10,18 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-const uploadSentenceInDb = async (sentence, q) => {
+const uploadSentenceInDb = async (sentence, sentencesDb) => {
     let request, result
     try {
         request = await db.collection('sentences').add({ text: sentence})
-        console.log(request.id)
     }
     catch (error){
         console.log(error)
     }
-    if (q === 2) {
+    if (sentencesDb.size === 2) {
         let sentences = [sentence]
-        console.log(sentences, q)
-        let request2
         try {
-            request2 = await db.collection('sentences').get()
-            request2.forEach(doc => {
+            sentencesDb.forEach(doc => {
                 let data = doc.data()
                 sentences.push(data.text)
             });
@@ -35,7 +31,7 @@ const uploadSentenceInDb = async (sentence, q) => {
         }
         result = testSentences2(sentences)
     }
-    return q === 2 ? result.count : 'ok'
+    return sentencesDb.size === 2 ? result.count : 'ok'
 }
 
 const getSentencesQuantity = async () => {
@@ -46,7 +42,7 @@ const getSentencesQuantity = async () => {
     catch (error){
         console.log(error)
     }
-    return request.size ?? 0
+    return request
 }
 module.exports.uploadSentenceInDb = uploadSentenceInDb;
 module.exports.getSentencesQuantity = getSentencesQuantity;

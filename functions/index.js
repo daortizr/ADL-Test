@@ -32,19 +32,20 @@ exports.testSentenses = functions.https.onRequest((request, response) => {
 });
 
 exports.updaloadSentences = functions.https.onRequest(async (request, response) => {
-    let sentencesQ, req
+    let sentences, req
     try {
-        sentencesQ = await getSentencesQuantity()
+        sentences = await getSentencesQuantity()
     }
     catch (error) {
         response.status(500).send('error')
     }
-    if (sentencesQ >= 3) response.status(500).send('Se alcanzó el limite de frases')
-    try {
-        console.log(sentencesQ)
-        req = await uploadSentenceInDb(request.body.sentence, sentencesQ)
-        console.log(req)
-        response.status(200).json(req)
+    if (sentences.size >= 3) response.status(500).send('Se alcanzó el limite de frases')
+    else {
+        try {
+            req = await uploadSentenceInDb(request.body.sentence, sentences)
+            response.status(200).json(req)
+        }
+        catch (error) { }
     }
-    catch (error) { }
+    
 });

@@ -18,15 +18,41 @@ const testSentences2 = (body) => {
     let secondArray = body[1].split(' ')
     let thirdArray = body[2].split(' ')
     let cont = 0
+    let acceptedWords = []
     firstArray.forEach(word => {
         secondArray.forEach(word2 => {
-            thirdArray.forEach(word3=>{
+            thirdArray.forEach(word3 => {
+                let validation = false
                 let result = testWords2({ first: word, second: word2, third: word3 })
-                result.result ? cont++ : null
+                validation = validation || result.result
+                if (validation) {
+                    if (validateWord(result.obj, acceptedWords)) acceptedWords.push(result.obj)
+                    cont++
+                }
             })
         });
     });
-    return { result: cont > 0, count: cont }
+    console.log('acceptedWords', acceptedWords)
+    return { result: cont > 0, count: acceptedWords.length }
+}
+
+const validateWord = (newWord, wordsArray) => {
+    let generalValidation = true
+    if (wordsArray.length > 0) {
+        wordsArray.forEach((word, index) => {
+            let tempValidation = true
+            if (Object.keys(word).length === Object.keys(newWord).length) {
+                Object.keys(word).forEach(letter => {
+                    if (!(word[letter] === newWord[letter])) tempValidation = false
+                });
+                generalValidation = generalValidation && !tempValidation
+            }
+        });
+        return generalValidation
+    }
+    else {
+        return generalValidation
+    }
 }
 module.exports.testSentences = testSentences;
 module.exports.testSentences2 = testSentences2;
