@@ -1,6 +1,5 @@
 {
   "projects": {
-    "default": "adltest2",
-    "default2":"adltest-678ba"
+    "default":"adltest-678ba"
   }
 }
