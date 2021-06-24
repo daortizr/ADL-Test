@@ -2,7 +2,7 @@ const { testSentences2 } = require('../testSentences')
 
 var admin = require("firebase-admin");
 
-var serviceAccount = require('../../functions/credenciales/adltest2-firebase-adminsdk-vaj7x-bb150a5077.json');
+var serviceAccount = require('../../credenciales/adltest-678ba-firebase-adminsdk-rbuno-33335c01d4.json');
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)

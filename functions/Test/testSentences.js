@@ -1,4 +1,4 @@
-const { testWords, testWords2 } = require('./testWords')
+const { testWord, testWords2 } = require('./testWords')
 const testSentences = (body) => {
     let firstArray = body.first.split(' ')
     let secondArray = body.second.split(' ')
@@ -6,7 +6,7 @@ const testSentences = (body) => {
     let cont = 0
     firstArray.forEach(word => {
         secondArray.forEach(word2 => {
-            let result = testWords({ first: word, second: word2 })
+            let result = testWord({ first: word, second: word2 })
             result.result ? cont++ : null
         });
     });

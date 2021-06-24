@@ -1,18 +1,12 @@
-const { testWords } = require('../Test/testWords')
-const { testSentences } = require('../Test/testSentences')
-const { uploadSentenceInDb, getSentencesQuantity } = require('../Test/Database/query')
+const { testWord } = require('./Test/testWords')
+const { testSentences } = require('./Test/testSentences.js')
+const { uploadSentenceInDb, getSentencesQuantity } = require('./Test/Database/query')
 
 const functions = require("firebase-functions");
 
-// The Firebase Admin SDK to access Firestore.
-
-
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
 exports.testWords = functions.https.onRequest((request, response) => {
     try {
-        let result = testWords(request.body)
+        let result = testWord(request.body)
         response.status(200).json(result)
     }
     catch(error){

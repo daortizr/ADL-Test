@@ -1,4 +1,4 @@
-const testWords = (body) => {
+const testWord = (body) => {
     let firstArray = Array.from(body.first)
     let secondArray = Array.from(body.second)
     if (firstArray.length !== secondArray.length) return { result: false }
@@ -6,7 +6,6 @@ const testWords = (body) => {
     let secondObj = getLettersObject(secondArray)
     let res = true
     Object.keys(firstObj).forEach(key => {
-        // if ((body.first === 'lucia' || body.second === 'lucia') && (body.first === 'licua' || body.second === 'licua')) console.log(key, firstObj[key], secondObj[key])
         if (firstObj[key] !== secondObj[key]) res = false
     });
     return { result: res, obj: firstObj }
@@ -14,9 +13,9 @@ const testWords = (body) => {
 
 const testWords2 = (body) => {
     let res = false
-    let oneAndTwo = testWords({ first: body.first, second: body.second })
-    let twoAndThree = testWords({ first: body.second, second: body.third })
-    let oneAndThree = testWords({ first: body.first, second: body.third })
+    let oneAndTwo = testWord({ first: body.first, second: body.second })
+    let twoAndThree = testWord({ first: body.second, second: body.third })
+    let oneAndThree = testWord({ first: body.first, second: body.third })
     let returnObj = {}
     if (oneAndTwo.result || twoAndThree.result || oneAndThree.result) res = true
     if (oneAndTwo.result) returnObj = oneAndTwo.obj
@@ -34,5 +33,5 @@ const getLettersObject = (wordArray) => {
     return newObj
 }
 
-module.exports.testWords = testWords;
+module.exports.testWord = testWord;
 module.exports.testWords2 = testWords2;
