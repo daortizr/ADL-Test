@@ -1,5 +1,15 @@
 # ADL-Test
 
+# instalar dependencia
+```bash
+cd functions && npm install
+```
+# Login en firebase
+```bash
+cd functions && firebase login --reauth
+inicar sesion con correo y contraseña
+```
+
 # correr las funciones en localhost
 
 ```bash

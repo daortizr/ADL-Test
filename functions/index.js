@@ -7,7 +7,7 @@ const functions = require("firebase-functions");
 exports.testWords = functions.https.onRequest((request, response) => {
     try {
         let result = testWord(request.body)
-        response.status(200).json(result)
+        response.status(200).json({ result: result.result })
     }
     catch(error){
         response.status(500).send('error')
